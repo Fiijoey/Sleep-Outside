@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = 'so-cart'
+const LOCAL_STORAGE_KEY = "so-cart";
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -32,9 +32,18 @@ export function addToLocalStorage(data, key = LOCAL_STORAGE_KEY) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener('touchend', (event) => {
+  qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener('click', callback);
+  qs(selector).addEventListener("click", callback);
+}
+
+//getParam function for return a parameter from the URL when requested
+
+export function getParam(param){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const value = urlParams.get(param);
+  return value;
 }
