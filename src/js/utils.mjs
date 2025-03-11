@@ -38,6 +38,9 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+export function clearHtml(element){
+  element.innerHTML = "";
+}
 
 //getParam function for return a parameter from the URL when requested
 
@@ -46,4 +49,12 @@ export function getParam(param){
   const urlParams = new URLSearchParams(queryString);
   const value = urlParams.get(param);
   return value;
+}
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+  if (clear){
+    clearHtml(parentElement);
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }

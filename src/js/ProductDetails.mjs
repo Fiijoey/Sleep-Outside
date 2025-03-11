@@ -21,7 +21,7 @@ export default class ProductDetails{
           alt="${product.NameWithoutBrand}"
         />
 
-        <p class="product-card__price">$${product.SuggestedRetailPrice.toFixed(2)}</p>
+        <p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>
 
         <p class="product__color">${product.Colors[0].ColorName}</p>
 
