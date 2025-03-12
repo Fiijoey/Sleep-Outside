@@ -1,3 +1,5 @@
+const LOCAL_STORAGE_KEY = 'so-cart'
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -6,18 +8,33 @@ export function qs(selector, parent = document) {
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
 // retrieve data from localstorage
-export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+export function getLocalStorage(key = LOCAL_STORAGE_KEY) {
+  return JSON.parse(localStorage.getItem(key)) || [];
 }
+
 // save data to local storage
-export function setLocalStorage(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
+export function setLocalStorage(data, key = LOCAL_STORAGE_KEY) {
+  let dataArray = data;
+  localStorage.setItem(key, JSON.stringify(dataArray));
+}
+
+export function addToLocalStorage(data, key = LOCAL_STORAGE_KEY) {
+  if (localStorage.getItem(key) == null) {
+    let dataArray = [];
+    dataArray.push(data);
+    localStorage.setItem(key, JSON.stringify(dataArray));
+    //dataArray.push(JSON.parse(localStorage.getItem(key)));
+  } else {
+    let dataArray = JSON.parse(localStorage.getItem(key)); //
+    dataArray.unshift(data);
+    localStorage.setItem(key, JSON.stringify(dataArray));
+  }
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
 }
