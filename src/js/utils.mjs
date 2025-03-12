@@ -1,5 +1,3 @@
-const LOCAL_STORAGE_KEY = 'so-cart'
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -8,33 +6,44 @@ export function qs(selector, parent = document) {
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
 // retrieve data from localstorage
-export function getLocalStorage(key = LOCAL_STORAGE_KEY) {
-  return JSON.parse(localStorage.getItem(key)) || [];
+export function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
 }
-
 // save data to local storage
-export function setLocalStorage(data, key = LOCAL_STORAGE_KEY) {
-  let dataArray = data;
-  localStorage.setItem(key, JSON.stringify(dataArray));
+export function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function addToLocalStorage(data, key = LOCAL_STORAGE_KEY) {
-  if (localStorage.getItem(key) == null) {
-    let dataArray = [];
-    dataArray.push(data);
-    localStorage.setItem(key, JSON.stringify(dataArray));
-    //dataArray.push(JSON.parse(localStorage.getItem(key)));
-  } else {
-    let dataArray = JSON.parse(localStorage.getItem(key)); //
-    dataArray.unshift(data);
-    localStorage.setItem(key, JSON.stringify(dataArray));
-  }
+// helper to get parameter strings
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product;
 }
+
+// function to take a list of objects and a template and insert the objects as HTML into the DOM
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false
+) {
+  const htmlStrings = list.map(templateFn);
+  // if clear is true we need to clear out the contents of the parent.
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener('touchend', (event) => {
+  qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener('click', callback);
+  qs(selector).addEventListener("click", callback);
 }
