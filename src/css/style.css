@@ -101,7 +101,25 @@ button {
   padding-top: 1em;
   position: relative;
   text-align: center;
+  display: inline-block;
 }
+
+.cart-count {
+  position: absolute;
+  top: 7px; /* Adjust to align with your icon */
+  right: -10px; /* Adjust to align with your icon */
+  background-color: red;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+  text-align: center;
+  min-width: 1.2rem; /* Ensure it stays circular for single digits */
+  line-height: 1.2rem;
+  display: none; /* Initially hidden */
+}
+
 
 .cart svg {
   width: 25px;
