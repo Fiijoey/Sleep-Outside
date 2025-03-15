@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = 'so-cart'
+const LOCAL_STORAGE_KEY = "so-cart"
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -32,11 +32,11 @@ export function addToLocalStorage(data, key = LOCAL_STORAGE_KEY) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener('touchend', (event) => {
+  qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener('click', callback);
+  qs(selector).addEventListener("click", callback);
 }
 
 export function getParams(param) {
@@ -44,4 +44,18 @@ export function getParams(param) {
   const urlParams = new URLSearchParams(queryString);
   const value = urlParams.get(param)
   return value;
+}
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false
+) {
+  const htmlStrings = list.map(templateFn);
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
