@@ -5,7 +5,7 @@ import { updateCartCount } from "./shared.js"; // Import the cart count updater
 function removeItem(itemId) {
   // Get the stored cart items
   let storage = getLocalStorage("so-cart");
-  
+
   // Find and remove the item by its ID
   storage.forEach(item => {
     if (item.Id === itemId) {
@@ -18,10 +18,11 @@ function removeItem(itemId) {
   });
 }
 
+
 function addRemoveListener() {
   // Add event listeners to all "remove-item" buttons
   let removeButtons = document.querySelectorAll(".remove-item");
-  
+
   for (let index = 0; index < removeButtons.length; index++) {
     let element = removeButtons[index];
     element.addEventListener("click", () => {
@@ -33,18 +34,25 @@ function addRemoveListener() {
 function renderCartContents() {
   // Get the items from local storage
   const cartItems = getLocalStorage("so-cart");
+  const updatedCartItems = Array.isArray(cartItems) ? cartItems : [cartItems];
 
-  // Generate HTML for each cart item
+  //const totalPrice = updatedCartItems.reduce((acc, item) => acc + (item.FinalPrice * item.quantity), 0);
+  const totalPrice = updatedCartItems.reduce((acc, item) => acc + parseFloat(item.FinalPrice || 0), 0);
+
+  const cartTotalElement = document.querySelector(".cart-total");
+
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  
-  // Render the generated HTML into the product list container
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  
-  // Add click listeners for remove buttons
   addRemoveListener();
-
-  // Update the cart count after rendering
   updateCartCount();
+
+  if (updatedCartItems.length === 0) {
+    cartTotalElement.classList.add("hidden");
+  } else {
+    cartTotalElement.classList.remove("hidden");
+    cartTotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+  }
+
 }
 
 function cartItemTemplate(item) {

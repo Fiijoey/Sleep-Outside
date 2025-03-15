@@ -1,3 +1,7 @@
+//Testing testing testing
+
+//Even more testing so I don't mess up our main </3
+
 import { addToLocalStorage } from "./utils.mjs";
 
 export default class ProductDetails{
@@ -42,7 +46,7 @@ export default class ProductDetails{
     async init(){
         this.product = await this.dataSource.findProductById(this.productId);
 
-        this.renderProductDetails("main");
+    this.renderProductDetails("main");
 
     document
       .getElementById("addToCart")
