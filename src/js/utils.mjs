@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = "so-cart"
+const LOCAL_STORAGE_KEY = "so-cart";
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -38,24 +38,23 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+export function clearHtml(element){
+  element.innerHTML = "";
+}
 
-export function getParams(param) {
+//getParam function for return a parameter from the URL when requested
+
+export function getParam(param){
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const value = urlParams.get(param)
+  const value = urlParams.get(param);
   return value;
 }
 
-export function renderListWithTemplate(
-  templateFn,
-  parentElement,
-  list,
-  position = "afterbegin",
-  clear = false
-) {
-  const htmlStrings = list.map(templateFn);
-  if (clear) {
-    parentElement.innerHTML = "";
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+  if (clear){
+    clearHtml(parentElement);
   }
+  const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
