@@ -4,60 +4,60 @@ import { updateCartCount } from "./shared.js"; // Import the cart count updater
 
 function removeItem(itemId) {
   // Get the stored cart items
-  function removeItem(itemId) {
-    let storage = getLocalStorage("so-cart");
-    storage.forEach(item => {
-      if (item.Id === itemId) {
-        if (item.Id === itemId) {
-          let index = storage.indexOf(item);
-          storage.splice(index, 1); // Remove the item
-          setLocalStorage(storage, "so-cart"); // Save updated cart back to storage
-          renderCartContents(); // Re-render the cart
-          updateCartCount(); // Update the cart count
-        }
-      });
+  let storage = getLocalStorage("so-cart");
+
+  // Find and remove the item by its ID
+  storage.forEach(item => {
+    if (item.Id === itemId) {
+      let index = storage.indexOf(item);
+      storage.splice(index, 1); // Remove the item
+      setLocalStorage(storage, "so-cart"); // Save updated cart back to storage
+      renderCartContents(); // Re-render the cart
+      updateCartCount(); // Update the cart count
+    }
+  });
+}
+
+
+function addRemoveListener() {
+  // Add event listeners to all "remove-item" buttons
+  let removeButtons = document.querySelectorAll(".remove-item");
+
+  for (let index = 0; index < removeButtons.length; index++) {
+    let element = removeButtons[index];
+    element.addEventListener("click", () => {
+      removeItem(element.getAttribute("data-id"));
+    });
+  }
+}
+
+function renderCartContents() {
+  // Get the items from local storage
+  const cartItems = getLocalStorage("so-cart");
+  const updatedCartItems = Array.isArray(cartItems) ? cartItems : [cartItems];
+
+  //const totalPrice = updatedCartItems.reduce((acc, item) => acc + (item.FinalPrice * item.quantity), 0);
+  const totalPrice = updatedCartItems.reduce((acc, item) => acc + parseFloat(item.FinalPrice || 0), 0);
+
+  const cartTotalElement = document.querySelector(".cart-total");
+
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  addRemoveListener();
+  updateCartCount();
+
+  if (updatedCartItems.length === 0) {
+    cartTotalElement.classList.add("hidden");
+  } else {
+    cartTotalElement.classList.remove("hidden");
+    cartTotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
   }
 
-  function addRemoveListener() {
-    // Add event listeners to all "remove-item" buttons
+}
 
-
-    function addRemoveListener() {
-      let removeButtons = document.querySelectorAll(".remove-item");
-
-      for (let index = 0; index < removeButtons.length; index++) {
-        let element = removeButtons[index];
-        element.addEventListener("click", () => { removeItem(element.getAttribute("data-id")) });
-
-      }
-    }
-
-    function renderCartContents() {
-      // Get the items from local storage
-      const cartItems = getLocalStorage("so-cart");
-      const updatedCartItems = Array.isArray(cartItems) ? cartItems : [cartItems];
-
-      //const totalPrice = updatedCartItems.reduce((acc, item) => acc + (item.FinalPrice * item.quantity), 0);
-      const totalPrice = updatedCartItems.reduce((acc, item) => acc + parseFloat(item.FinalPrice || 0), 0);
-
-      const cartTotalElement = document.querySelector(".cart-total");
-
-      const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-      document.querySelector(".product-list").innerHTML = htmlItems.join("");
-      addRemoveListener();
-
-      if (updatedCartItems.length === 0) {
-        cartTotalElement.classList.add("hidden");
-      } else {
-        cartTotalElement.classList.remove("hidden");
-        cartTotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
-      }
-
-    }
-
-    function cartItemTemplate(item) {
-      // Template for each cart item
-      const newItem = `<li class="cart-card divider">
+function cartItemTemplate(item) {
+  // Template for each cart item
+  const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
       <img
         src="${item.Image}"
@@ -73,9 +73,9 @@ function removeItem(itemId) {
     <span class="remove-item" data-id ="${item.Id}">X</span>
   </li>`;
 
-      return newItem;
-    }
+  return newItem;
+}
 
-    // Initialize the cart page
-    renderCartContents(); // Render cart contents
-    updateCartCount(); // Update the cart count on initial page load
+// Initialize the cart page
+renderCartContents(); // Render cart contents
+updateCartCount(); // Update the cart count on initial page load
