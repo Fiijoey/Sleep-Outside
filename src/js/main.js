@@ -12,5 +12,5 @@ const productList1 = new ProductList("tents", dataSource, element);
 productList1.init();
 
 // Update the cart count on page load
+await loadHeaderFooter();
 updateCartCount();
-loadHeaderFooter();

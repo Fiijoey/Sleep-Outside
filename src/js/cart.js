@@ -78,6 +78,6 @@ function cartItemTemplate(item) {
 }
 
 // Initialize the cart page
-renderCartContents(); // Render cart contents
-updateCartCount(); // Update the cart count on initial page load
-loadHeaderFooter();
+await loadHeaderFooter();
+renderCartContents();
+updateCartCount();

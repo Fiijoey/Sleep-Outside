@@ -12,5 +12,5 @@ const product = new ProductDetails(productId, dataSource);
 product.init();
 
 // Update the cart count on page load
+await loadHeaderFooter();
 updateCartCount();
-loadHeaderFooter();
