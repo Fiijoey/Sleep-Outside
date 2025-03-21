@@ -1,6 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
 import { setLocalStorage } from "./utils.mjs";
 import { updateCartCount } from "./shared.js"; // Import the cart count updater
+import { loadHeaderFooter } from "./utils.mjs";
 
 function removeItem(itemId) {
   // Get the stored cart items
@@ -79,3 +80,4 @@ function cartItemTemplate(item) {
 // Initialize the cart page
 renderCartContents(); // Render cart contents
 updateCartCount(); // Update the cart count on initial page load
+loadHeaderFooter();
