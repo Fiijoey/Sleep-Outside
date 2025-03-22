@@ -77,7 +77,10 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-// Initialize the cart page
-await loadHeaderFooter();
-renderCartContents();
-updateCartCount();
+async function initCartPage() {
+  await loadHeaderFooter();
+  renderCartContents();
+  updateCartCount();
+}
+
+initCartPage();
