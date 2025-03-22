@@ -3,17 +3,18 @@
 //Even more testing so I don't mess up our main </3
 
 import { addToLocalStorage } from "./utils.mjs";
+import { updateCartCount } from "./shared.js";
 
-export default class ProductDetails{
-    constructor(productId, dataSource){
-        this.productId = productId;
-        this.product = {};
-        this.dataSource = dataSource;
+export default class ProductDetails {
+  constructor(productId, dataSource) {
+    this.productId = productId;
+    this.product = {};
+    this.dataSource = dataSource;
 
-    };
+  };
 
-    productDetailsTemplate(product){
-        return `
+  productDetailsTemplate(product) {
+    return `
     <section class="product-detail">
         <h3>${product.Brand.Name}</h3>
 
@@ -40,28 +41,29 @@ export default class ProductDetails{
         </div>
       </section>
       `;
-}
-    
+  }
 
-    async init(){
-        this.product = await this.dataSource.findProductById(this.productId);
+
+  async init() {
+    this.product = await this.dataSource.findProductById(this.productId);
 
     this.renderProductDetails("main");
 
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
-    };
-    addProductToCart(){
-        
-     addToLocalStorage(this.product, "so-cart");
-          
-    };
-    renderProductDetails(selector){
-        const element = document.querySelector(selector);
+  };
+  addProductToCart() {
+
+    addToLocalStorage(this.product, "so-cart");
+    updateCartCount();
+
+  };
+  renderProductDetails(selector) {
+    const element = document.querySelector(selector);
     element.insertAdjacentHTML(
       "afterBegin",
       this.productDetailsTemplate(this.product),
     );
-    }
+  }
 }
