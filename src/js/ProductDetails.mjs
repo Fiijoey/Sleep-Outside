@@ -10,8 +10,7 @@ export default class ProductDetails {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
-
-  };
+  }
 
   productDetailsTemplate(product) {
     return `
@@ -43,7 +42,6 @@ export default class ProductDetails {
       `;
   }
 
-
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
 
@@ -52,13 +50,11 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
-  };
+  }
   addProductToCart() {
-
     addToLocalStorage(this.product, "so-cart");
     updateCartCount();
-
-  };
+  }
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
     element.insertAdjacentHTML(

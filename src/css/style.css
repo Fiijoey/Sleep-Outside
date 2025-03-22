@@ -256,6 +256,19 @@ button {
   cursor: pointer;
 }
 
+.product-grid{
+  display: flex;
+  list-style: none;
+}
+.product-grid li{
+  text-align: center;
+  flex: 1 1 45%;
+  margin: 0.25em;
+  padding: 0.5em;
+  border: 1px solid var(--light-grey);
+  max-width: 250px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
