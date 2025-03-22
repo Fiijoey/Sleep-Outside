@@ -12,8 +12,8 @@ const product = new ProductDetails(productId, dataSource);
 product.init();
 
 async function initCartPage() {
-    await loadHeaderFooter();
-    updateCartCount();
+  await loadHeaderFooter();
+  updateCartCount();
 }
 
 initCartPage();
