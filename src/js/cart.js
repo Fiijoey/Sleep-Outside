@@ -1,6 +1,9 @@
 import { getLocalStorage } from "./utils.mjs";
 import { setLocalStorage } from "./utils.mjs";
 import { updateCartCount } from "./shared.js"; // Import the cart count updater
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 
 function removeItem(itemId) {
   // Get the stored cart items
@@ -13,7 +16,7 @@ function removeItem(itemId) {
       storage.splice(index, 1); // Remove the item
       setLocalStorage(storage, "so-cart"); // Save updated cart back to storage
       renderCartContents(); // Re-render the cart
-      updateCartCount(); // Update the cart count
+      updateCartCount(true); // Update the cart count
     }
   });
 }
@@ -44,7 +47,7 @@ function renderCartContents() {
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
   addRemoveListener();
-  updateCartCount();
+  updateCartCount(true);
 
   if (updatedCartItems.length === 0) {
     cartTotalElement.classList.add("hidden");
@@ -76,6 +79,7 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+
 // Initialize the cart page
 renderCartContents(); // Render cart contents
-updateCartCount(); // Update the cart count on initial page load
+updateCartCount(true); // Update the cart count on initial page load

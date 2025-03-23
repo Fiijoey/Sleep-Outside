@@ -180,6 +180,28 @@ button {
   max-width: 250px;
 }
 
+.product-listing{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+ 
+}
+
+.product-listing a{
+  transition-duration: 1s;
+}
+
+.product-listing a:hover{
+  transform: scale(1.3);
+  cursor: pointer;
+  
+}
+
+.product-icon{
+  width: 100%;
+  height: auto;
+  padding: 2em;
+}
+
 .product-card h2,
 .product-card h3,
 .product-card p {

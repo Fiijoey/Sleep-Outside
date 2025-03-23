@@ -1,4 +1,7 @@
+
 import { renderListWithTemplate } from "./utils.mjs";
+
+
 
 
 
@@ -27,7 +30,7 @@ export default class ProductList {
   }
   async init() {
     this.list = await this.dataSource.getData(this.category);
-    console.log(this.list);
+    
     this.renderList();
     document.querySelector(".title").textContent = this.category;
   }
