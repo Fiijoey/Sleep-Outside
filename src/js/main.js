@@ -1,3 +1,9 @@
 import { loadHeaderFooter } from "./utils.mjs";
+import { updateCartCount } from "./shared.js";
 
-loadHeaderFooter();
+async function initCartPage() {
+    await loadHeaderFooter();
+    updateCartCount();
+}
+
+initCartPage();

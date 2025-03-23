@@ -1,8 +1,14 @@
 import { loadHeaderFooter, getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+import { updateCartCount } from "./shared.js";
 
-loadHeaderFooter();
+async function initCartPage() {
+    await loadHeaderFooter();
+    updateCartCount();
+}
+
+initCartPage();
 
 const category = getParam("category");
 const dataSource = new ProductData();
