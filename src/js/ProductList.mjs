@@ -22,7 +22,12 @@ export default class ProductList {
     this.list = await this.dataSource.getData(this.category);
 
     this.renderList();
-    document.querySelector(".title").textContent = this.category;
+    const titleElement = document.querySelector(".title");
+    if (titleElement) {
+      titleElement.textContent = this.category;
+    } else {
+      console.warn("Title element not found in the DOM.");
+    }
   }
   renderList() {
     renderListWithTemplate(
