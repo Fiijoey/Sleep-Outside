@@ -53,13 +53,18 @@ export function getParam(param) {
   return value;
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   if (clear) {
     clearHtml(parentElement);
   }
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
-  
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {

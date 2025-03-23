@@ -8,8 +8,6 @@ const element = qs(".product-list");
 const category = getParam("category");
 const dataSource = new ProductData();
 
-
 const productList1 = new ProductList(category, dataSource, element);
 
 productList1.init();
-

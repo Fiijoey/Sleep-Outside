@@ -1,9 +1,4 @@
-
 import { renderListWithTemplate } from "./utils.mjs";
-
-
-
-
 
 function productCardTemplate(product) {
   return `<li class="product-card">
@@ -13,7 +8,7 @@ function productCardTemplate(product) {
       <h3 class="card_name">${product.NameWithoutBrand}</h3>
       <p class="product-card_price">$${product.FinalPrice.toFixed(2)}</p>
     </a>
-  </li>`
+  </li>`;
 }
 
 export default class ProductList {
@@ -25,11 +20,17 @@ export default class ProductList {
 
   async init() {
     this.list = await this.dataSource.getData(this.category);
-    
+
     this.renderList();
     document.querySelector(".title").textContent = this.category;
   }
   renderList() {
-    renderListWithTemplate(productCardTemplate, this.listElement, this.list, "afterbegin", false);
+    renderListWithTemplate(
+      productCardTemplate,
+      this.listElement,
+      this.list,
+      "afterbegin",
+      false,
+    );
   }
 }

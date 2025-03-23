@@ -18,7 +18,6 @@ function ShoppingCartTemplate(product) {
   return newProduct;
 }
 
-
 export default class ShoppingCart {
   constructor(key, parentSelector) {
     this.key = key;

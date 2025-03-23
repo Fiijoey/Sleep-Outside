@@ -5,73 +5,65 @@
 import { addToLocalStorage } from "./utils.mjs";
 import { updateCartCount } from "./shared";
 
+export default class ProductDetails {
+  constructor(productId, dataSource) {
+    this.productId = productId;
+    this.product = {};
+    this.dataSource = dataSource;
+  }
 
+  //     productDetailsTemplate(product){
+  //         return `
+  //     <section class="product-detail">
+  //         <h3>${product.Brand.Name}</h3>
 
-export default class ProductDetails{
-    constructor(productId, dataSource){
-        this.productId = productId;
-        this.product = {};
-        this.dataSource = dataSource;
-        
+  //         <h2 class="divider">${product.NameWithoutBrand}</h2>
 
-    };
+  //         <img
+  //           class="divider"
+  //           src="${product.Images.PrimaryLarge}"
+  //           alt="${product.NameWithoutBrand}"
+  //         />
 
-//     productDetailsTemplate(product){
-//         return `
-//     <section class="product-detail">
-//         <h3>${product.Brand.Name}</h3>
+  //         <p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>
 
-//         <h2 class="divider">${product.NameWithoutBrand}</h2>
+  //         <p class="product__color">${product.Colors[0].ColorName}</p>
 
-//         <img
-//           class="divider"
-//           src="${product.Images.PrimaryLarge}"
-//           alt="${product.NameWithoutBrand}"
-//         />
+  //         <p class="product__description">
+  //           ${product.DescriptionHtmlSimple}
+  //         </p>
 
-//         <p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>
+  //         <div class="product-detail__add">
+  //           <button id="addToCart" data-id="${product.Id}">
+  //             Add to Cart
+  //           </button>
+  //         </div>
+  //       </section>
+  //       `;
+  // }
 
-//         <p class="product__color">${product.Colors[0].ColorName}</p>
-
-//         <p class="product__description">
-//           ${product.DescriptionHtmlSimple}
-//         </p>
-
-//         <div class="product-detail__add">
-//           <button id="addToCart" data-id="${product.Id}">
-//             Add to Cart
-//           </button>
-//         </div>
-//       </section>
-//       `;
-// }
-
-
-    
-
-    async init(){
-        this.product = await this.dataSource.findProductById(this.productId);
+  async init() {
+    this.product = await this.dataSource.findProductById(this.productId);
 
     this.renderProductDetails();
 
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
-      updateCartCount(true);
-    };
-    addProductToCart(){
-        
-     addToLocalStorage(this.product, "so-cart");
-     updateCartCount(true);
-          
-    };
-    renderProductDetails(){
-      productDetailsTemplate(this.product);
-    }
+    updateCartCount(true);
+  }
+  addProductToCart() {
+    addToLocalStorage(this.product, "so-cart");
+    updateCartCount(true);
+  }
+  renderProductDetails() {
+    productDetailsTemplate(this.product);
+  }
 }
 
 function productDetailsTemplate(product) {
-  document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
+  document.querySelector("h2").textContent =
+    product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
   document.querySelector("#p-brand").textContent = product.Brand.Name;
   document.querySelector("#p-name").textContent = product.NameWithoutBrand;
 
@@ -81,7 +73,8 @@ function productDetailsTemplate(product) {
   const finalPrice = product.FinalPrice;
   document.querySelector("#p-price").textContent = `${finalPrice.toFixed(2)}`;
   document.querySelector("#p-color").textContent = product.Colors[0].ColorName;
-  document.querySelector("#p-description").innerHTML = product.DescriptionHtmlSimple;
+  document.querySelector("#p-description").innerHTML =
+    product.DescriptionHtmlSimple;
 
   document.querySelector("#addToCart").dataset.id = product.Id;
 }

@@ -10,7 +10,7 @@ function removeItem(itemId) {
   let storage = getLocalStorage("so-cart");
 
   // Find and remove the item by its ID
-  storage.forEach(item => {
+  storage.forEach((item) => {
     if (item.Id === itemId) {
       let index = storage.indexOf(item);
       storage.splice(index, 1); // Remove the item
@@ -20,7 +20,6 @@ function removeItem(itemId) {
     }
   });
 }
-
 
 function addRemoveListener() {
   // Add event listeners to all "remove-item" buttons
@@ -40,7 +39,10 @@ function renderCartContents() {
   const updatedCartItems = Array.isArray(cartItems) ? cartItems : [cartItems];
 
   //const totalPrice = updatedCartItems.reduce((acc, item) => acc + (item.FinalPrice * item.quantity), 0);
-  const totalPrice = updatedCartItems.reduce((acc, item) => acc + parseFloat(item.FinalPrice || 0), 0);
+  const totalPrice = updatedCartItems.reduce(
+    (acc, item) => acc + parseFloat(item.FinalPrice || 0),
+    0,
+  );
 
   const cartTotalElement = document.querySelector(".cart-total");
 
@@ -55,7 +57,6 @@ function renderCartContents() {
     cartTotalElement.classList.remove("hidden");
     cartTotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
   }
-
 }
 
 function cartItemTemplate(item) {
@@ -78,7 +79,6 @@ function cartItemTemplate(item) {
 
   return newItem;
 }
-
 
 // Initialize the cart page
 renderCartContents(); // Render cart contents

@@ -4,8 +4,8 @@ import ProductList from "./ProductList.mjs";
 import { updateCartCount } from "./shared.js";
 
 async function initCartPage() {
-    await loadHeaderFooter();
-    updateCartCount();
+  await loadHeaderFooter();
+  updateCartCount();
 }
 
 initCartPage();
