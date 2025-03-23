@@ -13,6 +13,27 @@ export default class ProductDetails {
   }
 
   productDetailsTemplate(product) {
+
+    //Discount flag - Rebecca
+    const suggestedRetailPrice = product.SuggestedRetailPrice || 0;
+    const listPrice = product.ListPrice || product.FinalPrice || 0;
+    const discount = suggestedRetailPrice > 0
+      ? ((suggestedRetailPrice - listPrice) / suggestedRetailPrice * 100).toFixed(0)
+      : 0;
+
+    let priceHTML = `<p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>`;
+    let discountFlag = "";
+
+    if (discount > 0) {
+      priceHTML = `
+      <p>
+        <span>$${listPrice.toFixed(2)}</span>
+      </p>`;
+
+      discountFlag = `<span class="discounted-price">${discount}% OFF</span>`;
+    }
+    //
+
     return `
     <section class="product-detail">
         <h3>${product.Brand.Name}</h3>
@@ -25,7 +46,8 @@ export default class ProductDetails {
           alt="${product.NameWithoutBrand}"
         />
 
-        <p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>
+        ${priceHTML}
+        ${discountFlag}
 
         <p class="product__color">${product.Colors[0].ColorName}</p>
 
