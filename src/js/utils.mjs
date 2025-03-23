@@ -1,3 +1,5 @@
+import { updateCartCount } from "./shared";
+
 const LOCAL_STORAGE_KEY = "so-cart";
 
 // wrapper for querySelector...returns matching element
@@ -57,6 +59,7 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   }
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+  
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
@@ -79,6 +82,6 @@ export async function loadHeaderFooter() {
   const headerElement = document.querySelector("#main-header");
   const footerElement = document.querySelector("#main-footer");
 
-  renderWithTemplate(headerTemplate, headerElement);
-  renderWithTemplate(footerTemplate, footerElement);
+  renderWithTemplate(headerTemplate, headerElement, true, updateCartCount);
+  renderWithTemplate(footerTemplate, footerElement, true, updateCartCount);
 }

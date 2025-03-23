@@ -10,7 +10,8 @@
 </head>
 
 <body>
-  <header class="divider" id="main-header"></header>
+  <header class="divider" id="main-header">
+  </header>
   <main class="divider">
     <div class="hero">
       <img src="/images/banner-sm.jpg" srcset="images/banner-sm.jpg 500w, images/banner.jpg"
@@ -26,34 +27,32 @@
         </p>
       </div>
     </div>
-
+    <div class="product-listing">
+      <a class="product-card-listing" href="./product_listing/index.html?category=tents">
+        <img class="product-icon" src="./images/product-icons/category-tents.svg" alt="category-tents">
+      </a>
+      <a class="product-card-listing" href="./product_listing/index.html?category=backpacks">
+        <img class="product-icon" src="./images/product-icons/category-backpacks.svg" alt="category-backpacks">
+      </a>
+      <a class="product-card-listing" href="./product_listing/index.html?category=sleeping-bags">
+        <img class="product-icon" src="./images/product-icons/category-sleepingbags.svg" alt="category-sleepingbags">
+      </a>
+      <a class="product-card-listing" href="./product_listing/index.html?category=hammocks">
+        <img class="product-icon" src="./images/product-icons/category-hammocks.svg" alt="category-hammoks">
+      </a>
+    </div>
+    <section class="mission">
+      <p>We spend too much time these days indoors...sitting usually.</p>
+      <p>No wonder we are a mess!</p>
+      <p>
+        What we really need is to get outside...in fact SLEEP outside. Our
+        mission is to provide you with everything you need to do this
+        comfortably at an affordable price.
+      </p>
+    </section>
     <section class="products">
-      <ul class="product-grid">
-        <li>
-          <a href="product_listing/index.html?category=tents">
-            <img src="images/category-tents.svg" alt="Tents">
-            <h2>Tents</h2>
-          </a>
-        </li>
-        <li>
-          <a href="product_listing/index.html?category=backpacks">
-            <img src="images/category-backpacks.svg" alt="Backpacks">
-            <h2>Backpacks</h2>
-          </a>
-        </li>
-        <li>
-          <a href="product_listing/index.html?category=sleeping-bags">
-            <img src="images/category-sleepingbags.svg" alt="Sleeping Bags">
-            <h2>Sleeping Bags</h2>
-          </a>
-        </li>
-        <li>
-          <a href="product_listing/index.html?category=hammocks">
-            <img src="images/category-hammocks.svg" alt="Hammocks">
-            <h2>Hammocks</h2>
-          </a>
-        </li>
-      </ul>
+      
+      <ul class="product-list"></ul>
     </section>
   </main>
   <footer id="main-footer"></footer>

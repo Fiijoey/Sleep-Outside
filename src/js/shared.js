@@ -1,6 +1,8 @@
 import { getLocalStorage } from "./utils.mjs";
 
-export function updateCartCount() {
+export function updateCartCount(loaded) {
+
+  if(loaded){
   const cartItems = getLocalStorage("so-cart") || [];
   const cartCountElement = document.querySelector(".cart-count");
 
@@ -14,4 +16,5 @@ export function updateCartCount() {
       cartCountElement.style.display = "none"; // Hide the cart count if the cart is empty
     }
   }
+}
 }
