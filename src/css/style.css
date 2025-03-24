@@ -320,3 +320,9 @@ footer {
 .cart-total.hidden {
   display: none;
 }
+
+.discounted-price {
+  font-size: 1.2rem;
+  color: red;
+  font-weight: bold;
+}

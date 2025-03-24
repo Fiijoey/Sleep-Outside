@@ -62,6 +62,27 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
+
+  //Discount flag - Rebecca
+  const suggestedRetailPrice = product.SuggestedRetailPrice || 0;
+  const listPrice = product.ListPrice || product.FinalPrice || 0;
+  const discount = suggestedRetailPrice > 0
+    ? ((suggestedRetailPrice - listPrice) / suggestedRetailPrice * 100).toFixed(0)
+    : 0;
+
+  let priceHTML = `<p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>`;
+  let discountFlag = "";
+
+  if (discount > 0) {
+    priceHTML = `
+  <p>
+    <span>$${listPrice.toFixed(2)}</span>
+  </p>`;
+
+    discountFlag = `<span class="discounted-price">${discount}% OFF</span>`;
+  }
+  //
+
   document.querySelector("h2").textContent =
     product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
   document.querySelector("#p-brand").textContent = product.Brand.Name;
@@ -71,7 +92,10 @@ function productDetailsTemplate(product) {
   productImage.src = product.Images.PrimaryExtraLarge;
   productImage.alt = product.NameWithoutBrand;
   const finalPrice = product.FinalPrice;
-  document.querySelector("#p-price").textContent = `${finalPrice.toFixed(2)}`;
+  document.querySelector("#p-price").innerHTML = priceHTML;
+  if (discount > 0) {
+    document.querySelector("#p-price").insertAdjacentHTML('beforeend', discountFlag);
+  }
   document.querySelector("#p-color").textContent = product.Colors[0].ColorName;
   document.querySelector("#p-description").innerHTML =
     product.DescriptionHtmlSimple;
