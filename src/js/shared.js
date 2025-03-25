@@ -6,7 +6,14 @@ export function updateCartCount(loaded) {
     const cartCountElement = document.querySelector(".cart-count");
 
     if (cartCountElement) {
-      const count = cartItems.length;
+
+      let count = 0;
+
+      cartItems.forEach(item => {
+        count += item.quantity;
+      });
+
+
 
       if (count > 0) {
         cartCountElement.textContent = count; // Update the number

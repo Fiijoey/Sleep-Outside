@@ -2,7 +2,7 @@
 
 //Even more testing so I don't mess up our main </3
 
-import { addToLocalStorage } from "./utils.mjs";
+import { addToLocalStorage, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { updateCartCount } from "./shared";
 
 export default class ProductDetails {
@@ -44,7 +44,9 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
-
+    if(this.product.quantity === undefined){
+      this.product.quantity = 1;
+    } 
     this.renderProductDetails();
 
     document
@@ -53,8 +55,35 @@ export default class ProductDetails {
     updateCartCount(true);
   }
   addProductToCart() {
+  let add = true;   
+
+let storage = getLocalStorage("so-cart");
+if(storage.length < 1){
+  addToLocalStorage(this.product, "so-cart");
+  updateCartCount(true);
+}
+else{
+  
+  storage.forEach(product => {
+    if(product.Id === this.product.Id){
+      product.quantity += 1;
+      setLocalStorage(storage, "so-cart");
+      add = false;
+    }
+
+    
+   
+    
+  });
+  if((add)){
     addToLocalStorage(this.product, "so-cart");
-    updateCartCount(true);
+    
+  }
+  
+  updateCartCount(true);}
+
+  
+    
   }
   renderProductDetails() {
     productDetailsTemplate(this.product);
