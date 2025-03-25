@@ -3,7 +3,7 @@ import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 import { updateCartCount } from "./shared.js";
 
-async function initCartPage() {
+export async function initCartPage() {
   await loadHeaderFooter();
   updateCartCount();
 }
