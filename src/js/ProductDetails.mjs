@@ -44,9 +44,9 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
-    if(this.product.quantity === undefined){
+    if (this.product.quantity === undefined) {
       this.product.quantity = 1;
-    } 
+    }
     this.renderProductDetails();
 
     document
@@ -55,35 +55,36 @@ export default class ProductDetails {
     updateCartCount(true);
   }
   addProductToCart() {
-  let add = true;   
+    let add = true;
 
-let storage = getLocalStorage("so-cart");
-if(storage.length < 1){
-  addToLocalStorage(this.product, "so-cart");
-  updateCartCount(true);
-}
-else{
-  
-  storage.forEach(product => {
-    if(product.Id === this.product.Id){
-      product.quantity += 1;
-      setLocalStorage(storage, "so-cart");
-      add = false;
+    let storage = getLocalStorage("so-cart");
+    if (storage.length < 1) {
+      addToLocalStorage(this.product, "so-cart");
+      updateCartCount(true);
+    }
+    else {
+
+      storage.forEach(product => {
+        if (product.Id === this.product.Id) {
+          product.quantity += 1;
+          setLocalStorage(storage, "so-cart");
+          add = false;
+        }
+
+
+
+
+      });
+      if ((add)) {
+        addToLocalStorage(this.product, "so-cart");
+
+      }
+
+      updateCartCount(true);
     }
 
-    
-   
-    
-  });
-  if((add)){
-    addToLocalStorage(this.product, "so-cart");
-    
-  }
-  
-  updateCartCount(true);}
 
-  
-    
+
   }
   renderProductDetails() {
     productDetailsTemplate(this.product);
@@ -120,7 +121,6 @@ function productDetailsTemplate(product) {
   const productImage = document.querySelector("#p-image");
   productImage.src = product.Images.PrimaryExtraLarge;
   productImage.alt = product.NameWithoutBrand;
-  const finalPrice = product.FinalPrice;
   document.querySelector("#p-price").innerHTML = priceHTML;
   if (discount > 0) {
     document.querySelector("#p-price").insertAdjacentHTML('beforeend', discountFlag);
