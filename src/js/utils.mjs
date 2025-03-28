@@ -90,3 +90,7 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement, true, updateCartCount);
   renderWithTemplate(footerTemplate, footerElement, true, updateCartCount);
 }
+
+export const sleep = function(ms){
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
