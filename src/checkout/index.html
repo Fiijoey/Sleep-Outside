@@ -9,7 +9,7 @@
 
   <title>Sleep Outside | Checkout</title>
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 
   <script src="../js/checkout.js" type="module"></script>
 </head>
@@ -21,6 +21,54 @@
   <main class="divider">
     <section class="products">
       <h2>Review & Place your Order</h2>
+    </section>
+    <section>
+      <form name="checkout">
+        <fieldset>
+          <label for="fname">First name:</label><br>
+          <input type="text" id="fname" name="fname" required><br>
+          <label for="lname">Last name:</label><br>
+          <input type="text" id="lname" name="lname" required><br><br>
+        </fieldset>
+        <fieldset>
+          <label for="address">Address:</label><br>
+          <input type="text" id="address" name="address" placeholder="email@domain.com" required><br>
+
+          <label for="city">City:</label><br>
+          <input type="text" id="city" name="city" required><br>
+
+          <label for="state">State:</label><br>
+          <input type="text" id="state" name="state" required><br>
+
+          <label for="zip">Zip Code:</label><br>
+          <input type="text" id="zip" name="zip" required><br>
+        </fieldset>
+        <fieldset>
+          <label for="creditcard">Credit Card Number:</label><br>
+          <input type="text" id="creditcard" name="creditcard" required><br>
+
+          <label for="expdate">Expiration Date:</label><br>
+          <input type="text" id="expdate" name="expdate" required><br>
+
+          <label for="security">Security Code:</label><br>
+          <input type="text" id="security" name="security" required><br>
+
+          <div>
+            <div>Items</div>
+            <div id="num-items"></div>
+            <div>Subtotal</div>
+            <div id="cartTotal"></div>
+            <div>Tax</div>
+            <div id="tax"></div>
+            <div>Shipping</div>
+            <div id="shipping"></div>
+            <div>Total</div>
+            <div id="orderTotal"></div>
+          </div>
+
+        </fieldset>
+        <button>Submit</button>
+      </form>
     </section>
   </main>
 
