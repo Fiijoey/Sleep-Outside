@@ -50,15 +50,14 @@ export default class CheckoutProcess {
         const itemNumElement = document.querySelector(
             this.outputSelector + " #num-items"
         );
-        itemNumElement.innerText = this.list.length;
+        itemNumElement.innerText = `Items: ${this.list.length}`;
         // calculate the total of all the items in the cart
         const amounts = this.list.map((item) => item.FinalPrice);
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
-        summaryElement.innerText = `$${this.itemTotal}`;;
+        summaryElement.innerText = `Subtotal: $${this.itemTotal}`;;
     }
 
     calculateOrderTotal() {
-        // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
         this.tax = (this.itemTotal * .06);
         this.shipping = 10 + (this.list.length - 1) * 2;
         this.orderTotal = (
@@ -90,7 +89,6 @@ export default class CheckoutProcess {
         order.tax = this.tax;
         order.shipping = this.shipping;
         order.items = packageItems(this.list);
-        //console.log(order);
 
         try {
             const response = await services.checkout(order);

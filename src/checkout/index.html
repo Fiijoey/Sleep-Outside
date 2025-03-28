@@ -25,49 +25,56 @@
     <section>
       <form name="checkout">
         <fieldset>
-          <label for="fname">First name:</label><br>
-          <input type="text" id="fname" name="fname" required><br>
-          <label for="lname">Last name:</label><br>
-          <input type="text" id="lname" name="lname" required><br><br>
-        </fieldset>
-        <fieldset>
-          <label for="address">Address:</label><br>
-          <input type="text" id="address" name="address" placeholder="email@domain.com" required><br>
-
-          <label for="city">City:</label><br>
-          <input type="text" id="city" name="city" required><br>
-
-          <label for="state">State:</label><br>
-          <input type="text" id="state" name="state" required><br>
-
-          <label for="zip">Zip Code:</label><br>
-          <input type="text" id="zip" name="zip" required><br>
-        </fieldset>
-        <fieldset>
-          <label for="creditcard">Credit Card Number:</label><br>
-          <input type="text" id="creditcard" name="creditcard" value="1234123412341234" required><br>
-
-          <label for="expdate">Expiration Date:</label><br>
-          <input type="text" id="expdate" name="expdate" required><br>
-
-          <label for="security">Security Code:</label><br>
-          <input type="text" id="security" name="security" required value="123"><br>
-
           <div>
-            <div>Items</div>
-            <div id="num-items"></div>
-            <div>Subtotal</div>
-            <div id="cartTotal"></div>
-            <div>Tax</div>
-            <div id="tax"></div>
-            <div>Shipping</div>
-            <div id="shipping"></div>
-            <div>Total</div>
-            <div id="orderTotal"></div>
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" required><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" required><br><br>
           </div>
-
         </fieldset>
-        <button type="submit" id="checkoutSubmit">Checkout</button>
+        <br>
+        <fieldset>
+          <legend>Address</legend>
+          <div>
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address" placeholder="email@domain.com" required><br>
+
+            <label for="city">City:</label><br>
+            <input type="text" id="city" name="city" required><br>
+
+            <label for="state">State:</label><br>
+            <input type="text" id="state" name="state" required><br>
+
+            <label for="zip">Zip Code:</label><br>
+            <input type="number" id="zip" name="zip" required><br>
+          </div>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>Payment</legend>
+          <div>
+            <label for="creditcard">Credit Card Number:</label><br>
+            <input type="number" id="creditcard" name="creditcard" value="1234123412341234" required><br>
+
+            <label for="expdate">Expiration Date:</label><br>
+            <input type="date" id="expdate" name="expdate" required><br>
+
+            <label for="security">Security Code:</label><br>
+            <input type="number" id="security" name="security" required value="123"><br>
+          </div>
+        </fieldset>
+        <br>
+        <div class="checkout-summary">
+          <div id="num-items"></div>
+          <div id="cartTotal"></div>
+          <div>Tax: <span id="tax"></span>
+          </div>
+          <div>Shipping: <span id="shipping"></span></div>
+          <div>Total: <span id="orderTotal"></span></div>
+        </div>
+        <br>
+        <button type="submit" id="checkoutSubmit">Submit Checkout</button>
+        <br>
       </form>
     </section>
   </main>

@@ -87,6 +87,10 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+document.getElementById("checkout-btn").addEventListener("click", function () {
+  window.location.href = "../checkout/index.html";
+});
+
 // Initialize the cart page
 renderCartContents(); // Render cart contents
 updateCartCount(true); // Update the cart count on initial page load
