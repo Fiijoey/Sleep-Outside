@@ -4,7 +4,6 @@ import ExternalServices from "./ExternalServices.mjs";
 const services = new ExternalServices();
 
 function formDataToJSON(formElement) {
-    // convert the form data to a JSON object
     const formData = new FormData(formElement);
     const convertedJSON = {};
     formData.forEach((value, key) => {
@@ -43,7 +42,6 @@ export default class CheckoutProcess {
     }
 
     calculateItemSummary() {
-        // calculate and display the total amount of the items in the cart, and the number of items.
         const summaryElement = document.querySelector(
             this.outputSelector + " #cartTotal"
         );
@@ -51,7 +49,6 @@ export default class CheckoutProcess {
             this.outputSelector + " #num-items"
         );
         itemNumElement.innerText = `Items: ${this.list.length}`;
-        // calculate the total of all the items in the cart
         const amounts = this.list.map((item) => item.FinalPrice);
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
         summaryElement.innerText = `Subtotal: $${this.itemTotal}`;;
@@ -65,12 +62,10 @@ export default class CheckoutProcess {
             parseFloat(this.tax) +
             parseFloat(this.shipping)
         )
-        // display the totals.
         this.displayOrderTotals();
     }
 
     displayOrderTotals() {
-        // once the totals are all calculated display them in the order summary page
         const tax = document.querySelector(`${this.outputSelector} #tax`);
         const shipping = document.querySelector(`${this.outputSelector} #shipping`);
         const orderTotal = document.querySelector(`${this.outputSelector} #orderTotal`);
@@ -85,10 +80,11 @@ export default class CheckoutProcess {
         const order = formDataToJSON(formElement);
 
         order.orderDate = new Date().toISOString();
+        order.items = packageItems(this.list);
         order.orderTotal = this.orderTotal;
         order.tax = this.tax;
         order.shipping = this.shipping;
-        order.items = packageItems(this.list);
+        //console.log(order);
 
         try {
             const response = await services.checkout(order);
