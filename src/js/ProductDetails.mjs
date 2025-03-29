@@ -2,7 +2,7 @@
 
 //Even more testing so I don't mess up our main </3
 
-import { addToLocalStorage, getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { addToLocalStorage, getLocalStorage, setLocalStorage, sleep } from "./utils.mjs";
 import { updateCartCount } from "./shared";
 
 export default class ProductDetails {
@@ -54,7 +54,10 @@ export default class ProductDetails {
       .addEventListener("click", this.addProductToCart.bind(this));
     updateCartCount(true);
   }
-  addProductToCart() {
+  async addProductToCart() {
+
+    const cartIcon = document.querySelector("#cart-icon");
+    cartIcon.classList.add("animate");
     let add = true;
 
     let storage = getLocalStorage("so-cart");
@@ -82,7 +85,9 @@ export default class ProductDetails {
 
       updateCartCount(true);
     }
-
+    // restarting class after the animation is diplayed
+await sleep(2000);
+cartIcon.classList.remove("animate");
 
 
   }
@@ -123,7 +128,7 @@ function productDetailsTemplate(product) {
   productImage.alt = product.NameWithoutBrand;
   document.querySelector("#p-price").innerHTML = priceHTML;
   if (discount > 0) {
-    document.querySelector("#p-price").insertAdjacentHTML('beforeend', discountFlag);
+    document.querySelector("#p-price").insertAdjacentHTML("beforeend", discountFlag);
   }
   document.querySelector("#p-color").textContent = product.Colors[0].ColorName;
   document.querySelector("#p-description").innerHTML =
