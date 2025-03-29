@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -88,9 +88,18 @@ export default class CheckoutProcess {
 
         try {
             const response = await services.checkout(order);
+            window.location.href = "/checkout/success.html" ;
             console.log(response);
+
+
         } catch (err) {
+            removeAllAlerts();
+            for (let message in err.message) {
+              alertMessage(err.message[message]);
+            }
+
             console.log(err);
+            
         }
     }
 }
