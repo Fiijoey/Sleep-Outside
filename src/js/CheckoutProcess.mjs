@@ -51,7 +51,7 @@ export default class CheckoutProcess {
         itemNumElement.innerText = `Items: ${this.list.length}`;
         const amounts = this.list.map((item) => item.FinalPrice);
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
-        summaryElement.innerText = `Subtotal: $${this.itemTotal}`;;
+        summaryElement.innerText = `Subtotal: $${this.itemTotal.toFixed(2)}`;
     }
 
     calculateOrderTotal() {
@@ -88,7 +88,7 @@ export default class CheckoutProcess {
 
         try {
             const response = await services.checkout(order);
-            window.location.href = "../checkout/success.html";
+            window.location.href = "/checkout/success.html";
             console.log(response);
 
 
