@@ -20,6 +20,7 @@ export default class ProductList {
 
   async init() {
     this.list = await this.dataSource.getData(this.category);
+    this.addSortEventListener()
 
     this.renderList();
     const titleElement = document.querySelector(".title");
@@ -30,6 +31,7 @@ export default class ProductList {
     }
   }
   renderList() {
+    this.listElement.innerHTML = '';
     renderListWithTemplate(
       productCardTemplate,
       this.listElement,
@@ -37,5 +39,37 @@ export default class ProductList {
       "afterbegin",
       false,
     );
+  }
+
+  //Individual Activity - Filter - Rebecca
+  addSortEventListener() {
+    const sortDropdown = document.getElementById("sort");
+    sortDropdown.addEventListener("change", (event) => {
+      this.sortList(event.target.value);
+    });
+  }
+
+  sortList(criteria) {
+    let sortedList;
+
+    switch (criteria) {
+      case "name-asc":
+        sortedList = this.list.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+      case "name-desc":
+        sortedList = this.list.sort((a, b) => b.Name.localeCompare(a.Name));
+        break;
+      case "price-asc":
+        sortedList = this.list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        break;
+      case "price-desc":
+        sortedList = this.list.sort((a, b) => b.FinalPrice - a.FinalPrice);
+        break;
+      default:
+        sortedList = this.list;
+        break;
+    }
+
+    this.renderList(sortedList);
   }
 }
