@@ -33,6 +33,38 @@ function addRemoveListener() {
   }
 }
 
+function updateQuantity(itemId, change) {
+  let storage = getLocalStorage("so-cart");
+  storage.forEach((item) => {
+    if (item.Id === itemId) {
+      // Update quantity ensuring a minimum of 1
+      item.quantity = Math.max((item.quantity || 1) + change, 1);
+    }
+  });
+  setLocalStorage(storage, "so-cart");
+  renderCartContents();
+  updateCartCount(true);
+}
+
+function addQuantityListeners() {
+  const increaseButtons = document.querySelectorAll(".increase-qty");
+  const decreaseButtons = document.querySelectorAll(".decrease-qty");
+
+  increaseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const itemId = button.getAttribute("data-id");
+      updateQuantity(itemId, 1);
+    });
+  });
+
+  decreaseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const itemId = button.getAttribute("data-id");
+      updateQuantity(itemId, -1);
+    });
+  });
+}
+
 function renderCartContents() {
   // Get the items from local storage
   const cartItems = getLocalStorage("so-cart");
@@ -49,23 +81,23 @@ function renderCartContents() {
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
   addRemoveListener();
+  addQuantityListeners();
   updateCartCount(true);
 
   if (updatedCartItems.length === 0) {
     cartTotalElement.classList.add("hidden");
   } else {
     cartTotalElement.classList.remove("hidden");
-    cartTotalElement.innerHTML = `Total: $${totalPrice.toFixed(2) }`;
+    cartTotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
   }
 }
 
 function cartItemTemplate(item) {
   // Template for each cart item
   let quantity = 0;
-  if(item.quantity === undefined){
+  if (item.quantity === undefined) {
     quantity = 1;
-  }
-  else{
+  } else {
     quantity = item.quantity;
   }
   const newItem = `<li class="cart-card divider">
@@ -79,7 +111,11 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty ${quantity}</p>
+    <div class="cart-card__quantity">
+      <button class="decrease-qty" data-id="${item.Id}">-</button>
+      <span class="qty-value">${quantity}</span>
+      <button class="increase-qty" data-id="${item.Id}">+</button>
+    </div>
     <p class="cart-card__price">$${item.FinalPrice * quantity}</p>
     <span class="remove-item" data-id ="${item.Id}">X</span>
   </li>`;

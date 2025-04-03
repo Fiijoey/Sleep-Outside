@@ -470,3 +470,81 @@ footer {
   font-size: var(--large-font);
   line-height: 1.5;
 }
+
+/* Quantity Control Styles */
+.cart-card__quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-card__quantity button {
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+  font-size: inherit;
+  margin: 0;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.cart-card__quantity .qty-value {
+  margin: 0 0.5em;
+}
+
+/* Professional Alert Styles */
+
+/* Styles for individual alerts created via Alert.js */
+.alert {
+  position: relative;
+  background-color: #f8f9fa;
+  /* light background */
+  border: 1px solid #ced4da;
+  /* subtle border */
+  padding: 0.5rem 0.7rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.alert>p {
+  margin: 0;
+}
+
+.alert span {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+  background-color: transparent;
+}
+
+.alert span:hover {
+  color: #000;
+}
+
+/* Styles for alert list from static displayAlerts method */
+.alert-list {
+  background-color: #fcf8e3;
+  /* soft yellowish background */
+  border: 1px solid #faebcc;
+  border-radius: 4px;
+  padding: 0.3rem;
+  margin: 1rem 0;
+}
+
+.alert-list p {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.alert-list p:last-child {
+  border-bottom: none;
+}
