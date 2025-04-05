@@ -13,6 +13,18 @@
   <header class="divider" id="main-header">
   </header>
   <main class="divider">
+    <!-- Breadcrumb Section -->
+    <nav aria-label="breadcrumb">
+      <div class="breadcrumb">
+        <a href="/index.html">Home</a>
+        <span class="separator">></span>
+        <a href="/category.html">Category</a>
+        <span class="separator">></span>
+        <a href="#">Product</a>
+        <span class="separator">></span>
+        <span>Current Page</span>
+      </div>
+    </nav>
     <h1 class="title"></h1>
     <!--Individual Activity - Filter - Rebecca-->
     <label for="sort">Sort By: </label>
@@ -24,6 +36,24 @@
     </select>
 
     <ul class="product-list"></ul>
+
+      <!-- Individual Product Detail Section -->
+    <section class="product-detail">
+      <h3 id="p-brand"></h3>
+      <h2 class="divider" id="p-name"></h2>
+
+      <img id="p-image" class="divider" alt="" />
+
+      <p id="p-price"></p>
+      <p id="p-color"></p>
+
+      <p id="p-description"></p>
+
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="">Add to Cart</button>
+      </div>
+    </section>
+
   </main>
   <footer id="main-footer"></footer>
 </body>
