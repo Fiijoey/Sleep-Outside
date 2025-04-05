@@ -14,4 +14,4 @@ window.addEventListener("load", () => {
 });
 
 // Update the cart count on page load
-//updateCartCount();
+updateCartCount();

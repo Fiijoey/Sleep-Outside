@@ -92,8 +92,12 @@ cartIcon.classList.remove("animate");
 
   }
   renderProductDetails() {
-    productDetailsTemplate(this.product);
+    const productHTML = productDetailsTemplate(this.product);
+    document.querySelector("main").innerHTML = productHTML; // or specify another container
+
+    document.querySelector("#addToCart").dataset.id = this.product.Id;  
   }
+
 }
 
 function productDetailsTemplate(product) {
@@ -135,4 +139,29 @@ function productDetailsTemplate(product) {
     product.DescriptionHtmlSimple;
 
   document.querySelector("#addToCart").dataset.id = product.Id;
+
+  return `
+    <section class="product-detail">
+      <h3 id="p-brand">${product.Brand.Name}</h3>
+      <h2 class="divider" id="p-name">${product.NameWithoutBrand}</h2>
+
+      <img
+        id="p-image"
+        class="divider"
+        src="${product.Images.PrimaryLarge}"
+        alt="${product.NameWithoutBrand}"
+      />
+
+      <p id="p-price">${priceHTML}</p>
+      ${discount > 0 ? `<div>${discountFlag}</div>` : ""}
+      <p id="p-color">${product.Colors[0].ColorName}</p>
+      <p id="p-description">${product.DescriptionHtmlSimple}</p>
+
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">
+          Add to Cart
+        </button>
+      </div>
+    </section>
+  `;
 }
